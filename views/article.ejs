@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title><%= title %></title>
+    <%- include('./partials/head.ejs'); -%>
+</head>
+<body>
+    <header>
+        <%- include('./partials/header.ejs'); -%>
+    </header>
+    <section class="container-fluid m-2">
+        <h1><%= article.title %> </h1>
+        <div class="content text-justify">
+            <%= article.content%>
+        </div>
+        <div class="control">
+            <a class="m-2" href= '<%= article.url %>/delete'>Delete</a>
+            <a class="m-2" href= '<%= article.url %>/update'>Edit</a>
+        </div>
+        <div class="createComentary">
+            <form action="<%= article.url %>/create/comentary" method="post">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="content">Content</label>
+                    <input type="text" class="form-control" name="content" required>
+                </div>                
+                <button type="submit" class="btn btn-primary">Coment</button>
+            </form>
+        </div>
+        <div class="cometary">
+            <% article.comentary.forEach(function(list){ %>
+                <%= list.name %>
+                <%= list.content %>
+            <% }) %>
+        </div>
+    </section>
+    <footer class="bg-dark">
+        <%- include('./partials/footer.ejs'); -%>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <%- include('./partials/head.ejs'); -%>
+  </head>
+  <body>
+    <header>
+      <%- include('./partials/header.ejs'); -%>
+    </header>
+    <section>
+      <h1><%= title %></h1>
+      <p>Number Of Articles:  <%=articleNumber%></p>
+      <a href="/post/create" class="bg-dark text-light btn add">+</a>
+      <% articles.forEach(function(list){ %>
+        <div class=" m-4 p-4 text-justify litleArt">
+          <h3><%= list.title %></h3>
+          <p>By:<%= list.author%></p>
+          <p><%= list.content.substring(0,150) %><span>...</span> </p>  
+          <p><%= list.datePost.toLocaleString() %></p>  
+          <a class="m-2" href= <%= list.url %>>Read More...</a>
+          <a class="m-2" href= '<%= list.url %>/delete'>Delete</a>
+          <a class="m-2" href= '<%= list.url %>/update'>Edit</a>
+        </div>
+      <% }) %>  
+    </section>
+    <footer class="bg-dark">
+      <%- include('./partials/footer.ejs'); -%>
+    </footer>
+  </body>
+</html>

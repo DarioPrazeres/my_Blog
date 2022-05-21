@@ -1,0 +1,39 @@
+body {
+  margin: 0px;
+  padding: 0px;
+}
+.add{
+  position: fixed;
+  bottom: 30%;
+  right: 200px;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.add:hover{
+  font-size: 35px;
+}
+.create{
+  padding: 30px;
+}
+.create .form-group{
+  width: 100%;
+}
+.content{
+  height: 300px;
+}
+.litleArt{
+  width: 400px;
+  height: 300px;
+}
+.createComentary{
+  width: 400px;
+}
+footer, .add{
+  color: white;
+  height: 50px;
+}

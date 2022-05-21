@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <%- include('./partials/head.ejs'); -%>
+  </head>
+  <body>
+    <header>
+      <%- include('./partials/header.ejs'); -%>
+    </header>
+    <section class="container-fluid create">
+        <h1><%= title %></h1>
+        <form action="" method="post" >
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" name="title" required value = <%= article === 'undefined' ? '': article.title %> >
+            </div>
+            <div class="form-group">
+              <label for="Content">Content</label>
+              <textarea type="text" name="content" class="form-control content" required>
+                <%= article === 'undefined' ? '': article.content%> 
+              </textarea>
+            </div>
+            <button type="submit" class="btn btn-primary m-2">Submit</button>
+        </form>
+        <div>
+          <%- include('./partials/errors.ejs'); -%>
+        </div>
+    </section>
+    <footer class="bg-dark">
+      <%- include('./partials/footer.ejs'); -%>
+    </footer>
+  </body>
+</html>
