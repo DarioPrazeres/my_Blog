@@ -3,7 +3,6 @@ var {body, validationResult} = require('express-validator');
 var async = require('async');
 //Models
 var Article = require('../models/articleModel');
-var Cometary = require('../models/comentary');
 //Show All articles post
 exports.index = function(req, res, next){
     async.parallel({
@@ -33,7 +32,6 @@ exports.postCreateArticle = [
     (req, res, next) => {
         const errors = validationResult(req);
         //Create a component
-        console.log(req.body.content);
         var articleNew = new Article(
             {
                 title: req.body.title,
@@ -42,7 +40,6 @@ exports.postCreateArticle = [
             }
         );
         if(!errors.isEmpty()){
-            console.log(articleNew)
            res.render('createArticle', {title: 'Create Article', errors: errors.array(), article: articleNew})
         }
         else{
@@ -61,14 +58,15 @@ exports.postCreateArticle = [
 ]
 //"Read" an Articles
 exports.getOneArticle = function(req, res, next){
+    const errors = validationResult(req)
     async.parallel({
         article: function(callback){
-            Article.findById(req.params.id).populate('comentary').exec(callback);
+            Article.findById(req.params.id).exec(callback);
         },
     }, function(err, result){
         if(err){return next(err);}
         console.log(result);
-        res.render('article', {title: result.article.title, article: result.article});
+        res.render('article', {title: result.article.title, article: result.article, errors: errors.array()});
     })
 }
 exports.getAllArticles = function(req, res, next){
@@ -76,7 +74,12 @@ exports.getAllArticles = function(req, res, next){
 }
 //Update An Articles
 exports.getUpdateArticle = function(req, res, next){
-    res.send('Not implemeted GET getUpateArticle')
+    const errors = validationResult(req);
+    Article.findById(req.params.id).exec(function(err, article){
+        if(err){return next(err);}
+        console.log(article)        
+        res.render('createArticle', {title: 'Update Article', errors: errors.array(), article: article})
+    })
 }
 exports.postUpdateArticle = function(req, res, next){
     res.send('Not Implemented Post  postUpdateArticle');

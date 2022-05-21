@@ -15,12 +15,6 @@ var ArticleSchema = new Schema(
             type: String,
             required: true
         },
-        comentary: [
-                {
-                    type: Schema.Types.ObjectId,
-                    ref: 'Comentary'
-                }
-        ],  
         isPosted:{
             type: Boolean,
             default: false

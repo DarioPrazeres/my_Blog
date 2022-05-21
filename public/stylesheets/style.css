@@ -20,18 +20,12 @@ body {
 .create{
   padding: 30px;
 }
-.create .form-group{
-  width: 100%;
-}
 .content{
   height: 300px;
 }
 .litleArt{
   width: 400px;
   height: 300px;
-}
-.createComentary{
-  width: 400px;
 }
 footer, .add{
   color: white;

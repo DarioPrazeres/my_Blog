@@ -15,5 +15,4 @@ router.post('/posts/:id/update', articlesController.postUpdateArticle);
 //Delete an Article
 router.get('/posts/:id/delete', articlesController.getDeleteArticle);
 router.post('/posts/:id/delete', articlesController.postDeleteArticle);
-
 module.exports = router;
