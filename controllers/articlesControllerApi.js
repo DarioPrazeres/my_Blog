@@ -65,4 +65,34 @@ exports.postCreateArticle = [
             });
         }
     }
-]
+];
+//Update an Article
+exports.updateArticle = (req, res, next) =>{
+    try {   
+        const errors = validationResult(req);
+        var articleUpdate = new Article(
+            {
+                title: req.body.title,
+                author: process.env.Author,
+                content: req.body.content,
+                _id: req.params.id
+            }
+        );
+        if(!errors.isEmpty()){
+            res.json({error: errors.array()});
+            return;
+        }
+        else{
+            Article.findByIdAndUpdate(req.params.id, articleUpdate, {}, function(err, theArticle){
+                res.json({article: theArticle});
+            })
+        }
+    } catch (err) {
+        res.status(500).json({message: err.message})
+    }
+}
+
+//Delete an Article
+exports.deleteArticle = (req, res, next) => {
+
+}

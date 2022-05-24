@@ -1,4 +1,4 @@
 GET http://localhost:3000/api/posts
 
 ###
-GET  http://localhost:3000/api/posts/articlesControl
+GET  http://localhost:3000/api/posts/628bfd265bcd640deb72a4ee

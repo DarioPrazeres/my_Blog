@@ -7,21 +7,15 @@ var articlesController = require('../controllers/articlesControllerApi');
 router.get('/api', (req, res, next) =>{
     res.json({message:'Hello World'})
 });
-//Articles Controllers
+//*******Articles Controllers
+//Show All Article
 router.get('/api/posts', articlesController.index);
+//Show only one Article
 router.get('/api/posts/:id', articlesController.getOneArticle);
+//Create an Article
 router.post('/api/post/create',articlesController.postCreateArticle);
-//Read One
-/*
-router.get('/posts/:id', articlesController.getOneArticle);
-//Create an Articles
-router.get('/post/create', articlesController.getCreateArticle);
-
-//update An Article
-router.get('/posts/:id/update', articlesController.getUpdateArticle);
-router.post('/posts/:id/update', articlesController.postUpdateArticle);
+//Update an Article
+router.patch('/api/posts/:id/update', articlesController.updateArticle);
 //Delete an Article
-router.get('/posts/:id/delete', articlesController.getDeleteArticle);
-router.post('/posts/:id/delete', articlesController.postDeleteArticle);
-*/
+router.delete('api/posts/:id/delete',  articlesController.deleteArticle);
 module.exports = router;
