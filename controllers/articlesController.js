@@ -18,8 +18,7 @@ exports.index = function(req, res, next){
     function(err, results){
         if(err){return next(err);}
         res.render('index', {title: 'All Articles', articles: results.listArticles, articleNumber: results.article_count});
-    })
-    
+    });    
 }
 //"Create" A Article
 exports.getCreateArticle = function(req, res, next){
@@ -69,9 +68,6 @@ exports.getOneArticle = function(req, res, next){
         res.render('article', {title: result.article.title, article: result.article, errors: errors.array()});
     })
 }
-exports.getAllArticles = function(req, res, next){
-    res.send('Not implemented getAllArticles yet!')
-}
 //Update An Articles
 exports.getUpdateArticle = function(req, res, next){
     const errors = validationResult(req);
@@ -81,13 +77,41 @@ exports.getUpdateArticle = function(req, res, next){
         res.render('createArticle', {title: 'Update Article', errors: errors.array(), article: article})
     })
 }
-exports.postUpdateArticle = function(req, res, next){
-    res.send('Not Implemented Post  postUpdateArticle');
-}
+exports.postUpdateArticle = [
+    (req, res, next) =>{
+        const errors = validationResult(req);
+        var articleUpdate = new Article(
+            {
+                title: req.body.title,
+                author: process.env.Author,
+                content: req.body.content,
+                _id: req.params.id
+            }
+        );
+        if(!errors.isEmpty()){
+            res.render('createArticle', {title: 'Create Article', errors: errors.array(), article: articleNew})
+            return;
+        }
+        else{
+            Article.findByIdAndUpdate(req.params.id, articleUpdate, {}, function(err, theArticle){
+                if(err){return next(err)}
+                res.redirect(theArticle.url)
+            })
+        }
+    }
+];
 //"Delete" An Article
 exports.getDeleteArticle = function(req, res, next){
-    res.send('Not Implemented GET  getDeleteArticle')
+    const errors = validationResult(req);
+    Article.findById(req.params.id).exec(function(err, article){
+        if(err){return next(err);}
+        console.log(article)        
+        res.render('deleteArticle', {title: 'Delete Article', errors: errors.array(), article: article})
+    })
 }
 exports.postDeleteArticle = function(req, res, next){
-    res.send('Not Implemented POST postDeleteArticle')
+    Article.findByIdAndRemove(req.body.nameID, function deleteAuthor(err) {
+        if (err) { return next(err); }
+        res.redirect('/')
+    })
 }

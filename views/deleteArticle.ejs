@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title><%= title %></title>
+    <%- include('./partials/head.ejs'); -%>
+</head>
+<body>
+    <header>
+        <%- include('./partials/header.ejs'); -%>
+    </header>
+    <section class="container-fluid m-2">
+        <h1><%= title %> : <%= article.title %></h1>
+        <p>Do you really want to delete this Article?</p>
+        <form action="" method="post">
+            <input type="hidden" name="nameID" value="<%= article._id %>">
+            <button type="submit" class="btn btn-danger">Submit</button>
+        </form>
+    </section>
+    <footer class="bg-dark">
+        <%- include('./partials/footer.ejs'); -%>
+    </footer>
+</body>
+</html>

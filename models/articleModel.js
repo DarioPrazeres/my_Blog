@@ -26,6 +26,6 @@ var ArticleSchema = new Schema(
     }
 );
 ArticleSchema.virtual('url').get(function(){
-    return '/posts/' +this._id;
+    return '/posts/' + this._id;
 })
 module.exports = mongoose.model('Article', ArticleSchema);
