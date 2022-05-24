@@ -91,8 +91,14 @@ exports.updateArticle = (req, res, next) =>{
         res.status(500).json({message: err.message})
     }
 }
-
 //Delete an Article
 exports.deleteArticle = (req, res, next) => {
-
+    try {
+        Article.findByIdAndRemove(req.body.nameID, function deleteAuthor(err) {
+            if (err) { return next(err); }
+            res.json({message: 'Article Deleted'});
+        })
+    } catch (err) {
+        res.status(500).json({message: err.message});
+    }
 }
