@@ -4,9 +4,10 @@ var router = express.Router();
 
 var articlesController = require('../controllers/articlesControllerApi');
 //Articles Controllers
+/*
 router.get('/api', (req, res, next) =>{
     res.json({message:'Hello World'})
-});
+});*/
 //*******Articles Controllers
 //Show All Article
 router.get('/api/posts', articlesController.index);

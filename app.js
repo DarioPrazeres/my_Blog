@@ -5,7 +5,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
-var cors = require('cors')
+var cors = require('cors');
+var jwt = require('jsonwebtoken');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var blogRouter = require('./routes/blog');
@@ -35,6 +36,41 @@ app.use('/', blogRouter);
 app.use('/', apiRouter);
 app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
 
+app.get('/api', verifyToken, (req, res, next) =>{
+  jwt.verify(req.token, process.env.password, (err, authData) => {
+    if(err){
+      res.sendStatus(403);
+    } else {
+      res.json({message:'Hello World', authData})
+    }
+  });  
+});
+//Api Login
+app.post('/api/login', (req, res) => {
+  const user = {
+    id: 1,
+    username: process.env.user,
+    email: 'darioedgar@gmail.com'
+  }
+  jwt.sign({user}, process.env.password, (err, token) => {
+    res.json({
+      token
+    })
+  })
+})
+
+function verifyToken(req, res, next){
+  const bearerHeader = req.headers['authorization'];
+  if(typeof bearerHeader !== 'undefined'){
+    const bearer = bearerHeader.split(' ');
+    const bearerToken = bearer[1]
+    req.token = bearerToken;
+    next();
+  }else{
+    //I am Sorry!
+    res.sendStatus(403);
+  }
+}
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

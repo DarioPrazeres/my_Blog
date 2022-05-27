@@ -1,4 +1,9 @@
-GET http://localhost:3000/api/posts
-
+GET http://localhost:3000/api
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6IkRhcmlvUHJhemVyZXMiLCJlbWFpbCI6ImRhcmlvZWRnYXJAZ21haWwuY29tIn0sImlhdCI6MTY1MzQ5NTQwMn0.ds-X2HheKhK93CDr31IfLtZaoPCkcUNw8qHl3noCFxA
 ###
 GET  http://localhost:3000/api/posts/628bfd265bcd640deb72a4ee
+
+|
+
+###
+POST  http://localhost:3000/api/login
