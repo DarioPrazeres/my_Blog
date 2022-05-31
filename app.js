@@ -33,7 +33,7 @@ app.use(cors());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/', blogRouter);
-app.use('/', apiRouter);
+app.use('/', verifyToken, apiRouter);
 app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
 
 app.get('/api', verifyToken, (req, res, next) =>{
